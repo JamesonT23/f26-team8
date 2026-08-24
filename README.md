@@ -1,7 +1,7 @@
 ## Title
-> Your project title
+CSC-340 Team 9
 
 ## Team Members
-> Team Member #1 name
+Jameson Teeters
 
-> Team Member #2 name
+Daniel Son
