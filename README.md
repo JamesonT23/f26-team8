@@ -18,3 +18,7 @@ MealPrep Match is a nutrition-forward meal prepping service that helps adults an
     v. Add meals to their subscription.
 
 ### 2. Provider:
+    i.   Create/Modify/Remove provider profile.
+    ii.  Add new meals and nutritional details for customers.
+    iii. View customer services.
+    iV.  Reply to customer reviews.
