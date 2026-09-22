@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MealPrep Match</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <style>
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .Intro {
+            background-color: white;
+            padding: 100px 20px;
+        }
+
+        .Intro h1 {
+            font-size: 52px;
+            font-weight: bold;
+        }
+
+        .Intro p {
+            font-size: 18px;
+            color: #666;
+            max-width: 650px;
+            margin: 20px auto;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .meal-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .meal-image {
+            height: 200px;
+            background-color: #dfe8e2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .how-it-works {
+            background-color: #eef4f0;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #198754;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .bottom-section {
+            background-color: white;
+        }
+
+        footer {
+            background-color: #212529;
+            color: white;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-black border-bottom">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+                MealPrep Match
+            </a>
+
+            <div class="d-flex gap-2">
+                <a href="customer/register.html"
+                   class="btn btn-primary">
+                    Get Started
+                </a>
+
+                <a href="login.html"
+                   class="btn btn-primary">
+                    Login
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <header class="Intro text-center">
+
+        <div class="container">
+
+            <h1>Find Your Perfect Meal Match</h1>
+
+            <p>
+                Discover meal plans matched to your dietary needs,
+                and preferences.
+            </p>
+
+            <div class="mt-4">
+
+                <a href="customer/register.html"
+                   class="btn btn-primary btn-lg me-2">
+                    I'm a Customer
+                </a>
+
+                <a href="provider/register.html"
+                   class="btn btn-primary btn-lg">
+                    I'm a Provider
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <section class="cards">
+
+        <div class="container">
+
+            <h2 class="text-center section-title">
+                Featured Meal Plans
+            </h2>
+
+            <div class="row g-4">
+
+
+                <div class="col-md-4">
+
+                    <div class="card meal-card h-100">
+
+                        <div class="meal-image">
+                            placeholder
+                        </div>
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                Food 1
+                            </h3>
+
+                            <span class="badge bg-primary mb-2">
+                                High Protein
+                            </span>
+
+                            <p class="card-text text-muted">
+                                Probably chicken something
+                            </p>
+
+                            <h5>$20.00</h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="card meal-card h-100">
+
+                        <div class="meal-image">
+                            placeholder
+                        </div>
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                Food 2
+                            </h3>
+
+                            <span class="badge bg-primary mb-2">
+                                Low Carb
+                            </span>
+
+                            <p class="card-text text-muted">
+                                something low on carbs
+                            </p>
+
+                            <h5>$10.00</h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="card meal-card h-100">
+
+                        <div class="meal-image">
+                            placeholder
+                        </div>
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                Food 3
+                            </h3>
+
+                            <span class="badge bg-primary mb-3">
+                                Vegan
+                            </span>
+
+                            <p class="card-text text-muted">
+                                Something vegan
+                            </p>
+
+                            <h5>$15.00</h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="how-it-works py-5">
+
+        <div class="HIW">
+
+            <h2 class="text-center section-title">
+                How It Works
+            </h2>
+
+            <div class="row text-center g-4">
+
+
+                <div class="col-md-4">
+
+                    <div class="step-number">
+                        1
+                    </div>
+
+                    <h3>Create Your Profile</h3>
+
+                    <p class="text-muted">
+                        Tell us about your dietary preferences,
+                        and restrictions.
+                    </p>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="step-number">
+                        2
+                    </div>
+
+                    <h3>Browse Meals</h3>
+
+                    <p class="text-muted">
+                        Explore meal plans from different
+                        providers and find options that fit you.
+                    </p>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="step-number">
+                        3
+                    </div>
+
+                    <h3>Choose Your Meals</h3>
+
+                    <p class="text-muted">
+                        Select any meals that you want,
+                        and add them to your subscription.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="bottom-section py-5 text-center">
+
+        <div class="container">
+
+            <h2 class="fw-bold">
+                Ready to Find Your Perfect Meals?
+            </h2>
+
+            <p class="text-muted mb-4">
+                Join MealPrep Match and discover meals
+                that fit your lifestyle.
+            </p>
+
+            <a href="customer/register.html"
+               class="btn btn-primary btn-lg">
+                Start Free Today
+            </a>
+
+        </div>
+
+    </section>
+
+
+</body>
+</html>
