@@ -116,16 +116,16 @@
     Then the meals should be displayed to any consumer
   ```
 
-- **US-7 - Respond to customer reviews**
+- **US-7 - Have Details on my Chef so the customer knows what they make**
 
-  _Story:_ As a provide, I want to respond to respond to customer reviews 
+  _Story:_ As a provide, I want to have a page detailing what I specify in
 
   _Acceptance:_
   ```gherkin
-  Scenario: Respond to customer review
-    Given I have recieved a review from a customer
-    When I respond to the customer's review
-    Then the review should be saved and visible to that specific customer and others
+  Scenario: Customer wants to know a chefs specialty
+    Given I have a valid Provider account
+    When the customer clicks on "About Me"
+    Then the button will link to a details page about a particular chef.
   ```
 
 - **US-8 - Display Nutritional Details**
