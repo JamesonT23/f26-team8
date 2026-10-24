@@ -1,5 +1,11 @@
 package com.example.mealprepmatch.entity;
 
-public class DietTags {
-    
+public enum DietTags {
+    KETO,
+    VEGAN,
+    VEGETARIAN,
+    GLUTEN_FREE,
+    LOW_FAT,
+    LOW_CARB,
+
 }
