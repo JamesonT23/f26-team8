@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.MealPrepMatch.entity.Consumer;
-import com.example.MealPrepMatch.service.ConsumerService;
+import com.example.mealprepmatch.entity.Consumer;
+import com.example.mealprepmatch.service.ConsumerService;
 
 import jakarta.validation.Valid;
 
