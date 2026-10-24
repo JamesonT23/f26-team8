@@ -28,15 +28,11 @@ public class MealPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(nullable = false, length = 100)
-    private String name;
-
     @Min (1)
     @Column(nullable = false)
     private Integer weeks;
-@ManyToOne(fetch = FetchType.LAZY, optional = false)
+  
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "consumer_id", nullable = false)
     @JsonIgnore
     private Consumer consumer;
@@ -46,6 +42,21 @@ public class MealPlan {
                joinColumns = @JoinColumn(name = "meal_plan_id"),
                inverseJoinColumns = @JoinColumn(name = "meal_id"))
     private List<Meal> mealsThisWeek = new ArrayList<>();
+  
+    @NotBlank
+    @Size(max = 2000)
+    @Column(nullable = false, length = 2000)
+    private String description;
+
+    @NotNull
+    @DecimalMin(value = "0.0")
+    @Column(nullable = false)
+    private Integer calories;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chef_id", nullable = false)
+    @JsonIgnore
+    private Chef chef;
 
     public MealPlan() {
     }
@@ -74,4 +85,51 @@ public class MealPlan {
         this.mealsThisWeek = mealsThisWeek;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Chef getChef() {
+        return chef;
+    }
+
+    public void setChef(Chef chef) {
+        this.chef = chef;
+    }
 }
