@@ -1,10 +1,13 @@
 package com.example.mealprepmatch.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,14 +15,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import java.util.List;
 
 @Entity
 @Table(name = "meal_plans")
@@ -85,14 +86,6 @@ public class MealPlan {
         this.mealsThisWeek = mealsThisWeek;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -101,28 +94,12 @@ public class MealPlan {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public Integer getCalories() {
         return calories;
     }
 
     public void setCalories(Integer calories) {
         this.calories = calories;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
     }
 
     public Chef getChef() {

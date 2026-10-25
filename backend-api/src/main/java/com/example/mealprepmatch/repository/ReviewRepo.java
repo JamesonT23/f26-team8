@@ -1,11 +1,14 @@
 package com.example.mealprepmatch.repository;
 
-import com.example.mealprepmatch.entity.Review;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.example.mealprepmatch.entity.Review;
 
 public interface ReviewRepo extends JpaRepository<Review, Long> {
 
     List<Review> findByChefId(Long chefId);
+
+    List<Review> findByConsumerId(Long consumerId);
 }
