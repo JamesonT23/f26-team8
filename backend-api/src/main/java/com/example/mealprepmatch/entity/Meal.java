@@ -1,6 +1,6 @@
 package com.example.mealprepmatch.entity;
 
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -35,7 +35,13 @@ public class Meal {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "diet_tags", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "tag", length = 40)
-    private Set<DietTags> blacklistedTags = new HashSet<>();
+    private Set<DietTags> dietTags = EnumSet.noneOf(DietTags.class);
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "blacklist_tags", joinColumns = @JoinColumn(name = "meal_id"))
+    @Column(name = "tag", length = 40)
+    private Set<BlacklistTags> blacklistTags = EnumSet.noneOf(BlacklistTags.class);
 
     @ManyToOne
     @JoinColumn(name = "chef_id")
@@ -96,12 +102,20 @@ public class Meal {
         this.fat = fat;
     }
 
-    public Set<DietTags> getBlacklistedTags() {
-        return blacklistedTags;
+    public Set<DietTags> getDietTags() {
+        return dietTags;
     }
 
-    public void setBlacklistedTags(Set<DietTags> blacklistedTags) {
-        this.blacklistedTags = blacklistedTags;
+    public void setDietTags(Set<DietTags> dietTags) {
+        this.dietTags = dietTags;
+    }
+
+    public Set<BlacklistTags> getBlacklistTags() {
+        return blacklistTags;
+    }
+
+    public void setBlacklistTags(Set<BlacklistTags> blacklistTags) {
+        this.blacklistTags = blacklistTags;
     }
 
     public Chef getChef() {

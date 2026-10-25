@@ -1,10 +1,11 @@
 
 package com.example.mealprepmatch.repository;
 
-import com.example.mealprepmatch.entity.MealPlan;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.example.mealprepmatch.entity.MealPlan;
 
 public interface MealPlanRepo extends JpaRepository<MealPlan, Long> {
 
