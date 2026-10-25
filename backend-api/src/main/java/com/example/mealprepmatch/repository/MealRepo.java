@@ -1,5 +1,8 @@
 package com.example.mealprepmatch.repository;
 
-public class MealRepo {
+import com.example.mealprepmatch.entity.Meal;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MealRepo extends JpaRepository<Meal, Long> {
 
 }

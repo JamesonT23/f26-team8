@@ -1,27 +1,9 @@
 package com.example.mealprepmatch.entity;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "meals")
@@ -49,11 +31,15 @@ public class Meal {
     @Column(nullable = false)
     private Integer fat;
 
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = DietTags.class)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "diet_tags", joinColumns = @JoinColumn(name = "consumer_id"))
+    @CollectionTable(name = "diet_tags", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "tag", length = 40)
     private Set<DietTags> blacklistedTags = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "chef_id")
+    private Chef chef;
 
     public Meal() {
     }
@@ -108,5 +94,21 @@ public class Meal {
 
     public void setFat(Integer fat) {
         this.fat = fat;
+    }
+
+    public Set<DietTags> getBlacklistedTags() {
+        return blacklistedTags;
+    }
+
+    public void setBlacklistedTags(Set<DietTags> blacklistedTags) {
+        this.blacklistedTags = blacklistedTags;
+    }
+
+    public Chef getChef() {
+        return chef;
+    }
+
+    public void setChef(Chef chef) {
+        this.chef = chef;
     }
 }
