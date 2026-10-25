@@ -1,12 +1,13 @@
 package com.example.mealprepmatch.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.example.mealprepmatch.entity.Chef;
 import com.example.mealprepmatch.entity.MealPlan;
 import com.example.mealprepmatch.repository.ChefRepo;
 import com.example.mealprepmatch.repository.MealPlanRepo;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AddMealsService {
@@ -37,7 +38,7 @@ public class AddMealsService {
         return mealPlanRepo.save(meal);
     }
 
-    public void deleteMeal(Long mealId) {
+    public void deleteMeal(Long mealId, Long mealPlanId) {
         MealPlan meal = mealPlanRepo.findById(mealId)
                 .orElseThrow(() -> new NotFoundException("Meal not found"));
 

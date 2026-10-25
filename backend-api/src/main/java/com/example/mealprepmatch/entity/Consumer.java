@@ -1,20 +1,29 @@
 package com.example.mealprepmatch.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.validation.constraints.DecimalMin;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "consumers")
@@ -49,11 +58,17 @@ public class Consumer {
     @Column(nullable = false, length = 30)
     private String accountStatus;
 
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = DietTags.class)
+    @ElementCollection(targetClass = DietTags.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "diet_tags", joinColumns = @JoinColumn(name = "consumer_id"))
     @Column(name = "tag", length = 40)
-    private Set<DietTags> blacklistedTags = new HashSet<>();
+    private Set<DietTags> preferredTags = EnumSet.noneOf(DietTags.class);
+
+    @ElementCollection(targetClass = BlacklistTags.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "blacklist_tags", joinColumns = @JoinColumn(name = "consumer_id"))
+    @Column(name = "tag", length = 40)
+    private Set<BlacklistTags> blacklistedTags = EnumSet.noneOf(BlacklistTags.class);
 
     @OneToMany(mappedBy = "consumer", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -110,16 +125,28 @@ public class Consumer {
         this.accountStatus = accountStatus;
     }
 
-    public Set<DietTags> getBlacklistedTags() {
+    public Set<DietTags> getPreferredTags() {
+        return preferredTags;
+    }
+
+    public void setPreferredTags(Set<DietTags> preferredTags) {
+        this.preferredTags = preferredTags;
+    }
+
+    public Set<BlacklistTags> getBlacklistedTags() {
         return blacklistedTags;
     }
 
-    public void setBlacklistedTags(Set<DietTags> blacklistedTags) {
+    public void setBlacklistedTags(Set<BlacklistTags> blacklistedTags) {
         this.blacklistedTags = blacklistedTags;
     }
 
     public List<MealPlan> getMealPlanList() {
         return mealPlanList;
+    }
+
+    public void setMealPlanList(List<MealPlan> mealPlanList) {
+        this.mealPlanList = mealPlanList;
     }
 
     public List<Review> getReviews() {
