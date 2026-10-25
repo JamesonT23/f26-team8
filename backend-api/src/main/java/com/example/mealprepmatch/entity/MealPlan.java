@@ -1,4 +1,3 @@
-
 package com.example.mealprepmatch.entity;
 
 import java.util.ArrayList;
@@ -26,25 +25,24 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "meal_plans")
 public class MealPlan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Min (1)
+    @Min(1)
     @Column(nullable = false)
     private Integer weeks;
-  
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "consumer_id", nullable = false)
     @JsonIgnore
     private Consumer consumer;
 
     @ManyToMany
-    @JoinTable(name = "meal_plan_meals",
-               joinColumns = @JoinColumn(name = "meal_plan_id"),
-               inverseJoinColumns = @JoinColumn(name = "meal_id"))
+    @JoinTable(name = "meal_plan_meals", joinColumns = @JoinColumn(name = "meal_plan_id"), inverseJoinColumns = @JoinColumn(name = "meal_id"))
     private List<Meal> mealsThisWeek = new ArrayList<>();
-  
+
     @NotBlank
     @Size(max = 2000)
     @Column(nullable = false, length = 2000)
@@ -59,11 +57,6 @@ public class MealPlan {
     @JoinColumn(name = "chef_id", nullable = false)
     @JsonIgnore
     private Chef chef;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consumer_id", nullable = false)
-    @JsonIgnore
-    private Consumer consumer;
 
     public MealPlan() {
     }
@@ -80,12 +73,16 @@ public class MealPlan {
         this.weeks = weeks;
     }
 
-    public List<Meal> getMealsThisWeek() {
-        return mealsThisWeek;
+    public Consumer getConsumer() {
+        return consumer;
     }
 
     public void setConsumer(Consumer consumer) {
         this.consumer = consumer;
+    }
+
+    public List<Meal> getMealsThisWeek() {
+        return mealsThisWeek;
     }
 
     public void setMealsThisWeek(List<Meal> mealsThisWeek) {
@@ -114,13 +111,5 @@ public class MealPlan {
 
     public void setChef(Chef chef) {
         this.chef = chef;
-    }
-
-    public Consumer getConsumer() {
-        return consumer;
-    }
-
-    public void setConsumer(Consumer consumer) {
-        this.consumer = consumer;
     }
 }
