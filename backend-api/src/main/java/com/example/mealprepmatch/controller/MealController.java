@@ -1,43 +1,42 @@
 package com.example.mealprepmatch.controller;
 
-import java.util.List;
-import java.net.URI;
-
-import org.springframework.http.ResponseEntity;
+import com.example.mealprepmatch.entity.Meal;
+import com.example.mealprepmatch.service.AddMealsService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.mealprepmatch.entity.DietTags;
-import com.example.mealprepmatch.entity.Meal;
-import com.example.mealprepmatch.entity.MealPlan;
-import com.example.mealprepmatch.service.AddMealsService;
-import com.example.mealprepmatch.service.PantryService;
+import java.util.List;
 
-import jakarta.validation.Valid;
-
-
-@RestController 
+@RestController
 @RequestMapping("/api/meals")
 public class MealController {
+
     private final AddMealsService addMealsService;
-    private final PantryService pantryService;
 
-    public MealController(AddMealsService addMealsService, PantryService pantryService) {
+    public MealController(AddMealsService addMealsService) {
         this.addMealsService = addMealsService;
-        this.pantryService = pantryService;
     }
 
-    @PostMapping
-    public ResponseEntity<MealPlan> add(@PathVariable Long chefId, @Valid @RequestBody MealPlan plan) {
-        MealPlan created = addMealsService.addMeal(chefId, plan);
-        return ResponseEntity
-                .created(URI.create("/api/chefs/" + chefId + "/meal-plans/" + created.getId()))
-                .body(created);
+    // View all meals
+    @GetMapping
+    public List<Meal> getAllMeals() {
+        return addMealsService.getAllMeals();
     }
 
-    @DeleteMapping("/{mealPlanId}")
-    public ResponseEntity<Void> delete(@PathVariable Long chefId, @PathVariable Long mealPlanId) {
-        addMealsService.deleteMeal(chefId, mealPlanId);
-        return ResponseEntity.noContent().build();
+    // Chef adds a meal
+    @PostMapping("/chef/{chefId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Meal addMeal(
+            @PathVariable Long chefId,
+            @Valid @RequestBody Meal meal) {
+        return addMealsService.addMeal(chefId, meal);
     }
 
+    // Delete a meal
+    @DeleteMapping("/{mealId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMeal(@PathVariable Long mealId) {
+        addMealsService.deleteMeal(mealId);
+    }
 }

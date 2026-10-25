@@ -1,3 +1,4 @@
+
 package com.example.mealprepmatch.entity;
 
 import java.util.ArrayList;
@@ -59,6 +60,11 @@ public class MealPlan {
     @JsonIgnore
     private Chef chef;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "consumer_id", nullable = false)
+    @JsonIgnore
+    private Consumer consumer;
+
     public MealPlan() {
     }
 
@@ -108,5 +114,13 @@ public class MealPlan {
 
     public void setChef(Chef chef) {
         this.chef = chef;
+    }
+
+    public Consumer getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
     }
 }

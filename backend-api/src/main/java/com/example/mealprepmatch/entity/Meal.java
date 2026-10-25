@@ -3,18 +3,7 @@ package com.example.mealprepmatch.entity;
 import java.util.EnumSet;
 import java.util.Set;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "meals")
@@ -42,17 +31,21 @@ public class Meal {
     @Column(nullable = false)
     private Integer fat;
 
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = DietTags.class)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "diet_tags", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "tag", length = 40)
     private Set<DietTags> dietTags = EnumSet.noneOf(DietTags.class);
 
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = BlacklistTags.class)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "blacklist_tags", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "tag", length = 40)
     private Set<BlacklistTags> blacklistTags = EnumSet.noneOf(BlacklistTags.class);
+
+    @ManyToOne
+    @JoinColumn(name = "chef_id")
+    private Chef chef;
 
     public Meal() {
     }
@@ -124,5 +117,12 @@ public class Meal {
     public void setBlacklistTags(Set<BlacklistTags> blacklistTags) {
         this.blacklistTags = blacklistTags;
     }
-    
+
+    public Chef getChef() {
+        return chef;
+    }
+
+    public void setChef(Chef chef) {
+        this.chef = chef;
+    }
 }
