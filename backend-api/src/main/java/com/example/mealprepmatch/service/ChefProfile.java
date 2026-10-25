@@ -1,11 +1,12 @@
 package com.example.mealprepmatch.service;
 
-import com.example.mealprepmatch.entity.Chef;
-import com.example.mealprepmatch.repository.ChefRepo;
-import org.springframework.stereotype.Service;
+import java.util.List;
 import java.util.Optional;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
+
+import com.example.mealprepmatch.entity.Chef;
+import com.example.mealprepmatch.repository.ChefRepo;
 
 @Service
 public class ChefProfile {
