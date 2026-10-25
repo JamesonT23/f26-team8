@@ -38,7 +38,7 @@ public class AddMealsService {
         return mealPlanRepo.save(meal);
     }
 
-    public void deleteMeal(Long mealId) {
+    public void deleteMeal(Long mealId, Long mealPlanId) {
         MealPlan meal = mealPlanRepo.findById(mealId)
                 .orElseThrow(() -> new NotFoundException("Meal not found"));
 
