@@ -1,3 +1,0 @@
-DB_URL=jdbc:postgresql://ep-red-cell-b5m24ywd-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require
-DB_USER=neondb_owner
-DB_PASSWORD=npg_a90GOMEoyekD

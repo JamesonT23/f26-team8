@@ -91,7 +91,7 @@
 
 ### 2.2 Provider (Trainer) Stories
 
-- **US-5 - Register as a Trainer to Provide Services**
+- **US-5 - Register as a Chef to Provide Services**
 
   _Story:_ As a Provider, I want to create my account, so that I can promote and provide my services
 

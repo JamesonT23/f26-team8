@@ -32,12 +32,12 @@ public class Consumer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank 
     @Size(max = 100)
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotBlank
+    @NotBlank 
     @Email
     @Size(max = 254)
     @Column(nullable = false, unique = true, length = 254)
@@ -47,13 +47,13 @@ public class Consumer {
     @Column(length = 20)
     private String phoneNumber;
 
-    @NotBlank
+    @NotBlank 
     @Size(max = 255)
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @NotBlank
+    @NotBlank 
     @Size(max = 30)
     @Column(nullable = false, length = 30)
     private String accountStatus;
