@@ -1,6 +1,5 @@
 # MealPrepMatch Backend API
 
-
 ## UML Class Diagram
  
 ![UML class diagram](../backend-api/MealPrepMatchAPI_umlDiagram.jpg)
@@ -159,4 +158,5 @@ Content-Type: application/json
 
 The chef and consumer are linked by ID through the query parameters, so they are not part of the request body. Any `id` sent in the body is ignored.
 
-Validation: `rating` is required and must be a whole number from 1 to 5, and `comment` is optional with a maximum of 1000 characters. Invalid input returns 400. A missing chef or consumer returns 404. A consumer can review a given chef only once, and a second attempt returns 409.
+Validation: `rating` is required and must be a whole number from 1 to 5, and `comment` is optional with a maximum of 1000 characters. Invalid input returns 400.
+A missing chef or consumer returns 404. A consumer can review a given chef only once, and a second attempt returns 409.
