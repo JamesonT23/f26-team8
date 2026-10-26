@@ -10,7 +10,7 @@
 Base URL:
  
     local: http://localhost:8080/api
-    production: 
+    production: https://mealprepmatch.onrender.com
  
 > **Cold-start note:** Render's free tier puts the service to sleep after about 15 minutes of inactivity, so the first request afterward can take up to a minute.
  
