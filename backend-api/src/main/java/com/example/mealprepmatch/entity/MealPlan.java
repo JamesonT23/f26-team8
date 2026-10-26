@@ -53,11 +53,6 @@ public class MealPlan {
     @Column(nullable = false)
     private Integer calories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chef_id", nullable = false)
-    @JsonIgnore
-    private Chef chef;
-
     public MealPlan() {
     }
 
@@ -103,13 +98,5 @@ public class MealPlan {
 
     public void setCalories(Integer calories) {
         this.calories = calories;
-    }
-
-    public Chef getChef() {
-        return chef;
-    }
-
-    public void setChef(Chef chef) {
-        this.chef = chef;
     }
 }
