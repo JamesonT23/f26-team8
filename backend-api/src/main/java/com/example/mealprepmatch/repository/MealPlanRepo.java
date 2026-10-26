@@ -8,8 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.mealprepmatch.entity.MealPlan;
 
 public interface MealPlanRepo extends JpaRepository<MealPlan, Long> {
-
-    List<MealPlan> findByChefId(Long chefId);
-
     List<MealPlan> findByConsumerId(Long consumerId);
 }
