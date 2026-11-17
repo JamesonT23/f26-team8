@@ -48,8 +48,7 @@ public class Consumer {
     private String phoneNumber;
 
     @NotBlank 
-    @Size(max = 255)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -60,13 +59,13 @@ public class Consumer {
 
     @ElementCollection(targetClass = DietTags.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "diet_tags", joinColumns = @JoinColumn(name = "consumer_id"))
+    @CollectionTable(name = "consumer_diet_tags", joinColumns = @JoinColumn(name = "consumer_id"))
     @Column(name = "tag", length = 40)
     private Set<DietTags> preferredTags = EnumSet.noneOf(DietTags.class);
 
     @ElementCollection(targetClass = BlacklistTags.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "blacklist_tags", joinColumns = @JoinColumn(name = "consumer_id"))
+    @CollectionTable(name = "consumer_blacklist_tags", joinColumns = @JoinColumn(name = "consumer_id"))
     @Column(name = "tag", length = 40)
     private Set<BlacklistTags> blacklistedTags = EnumSet.noneOf(BlacklistTags.class);
 

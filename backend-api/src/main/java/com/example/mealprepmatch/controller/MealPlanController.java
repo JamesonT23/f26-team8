@@ -38,7 +38,6 @@ public class MealPlanController {
         return service.get(id);
     }
 
-    // GET /api/meal-plans?consumerId=1   or   ?chefId=2
     @GetMapping
     public List<MealPlan> list(@RequestParam(required = false) Long consumerId, @RequestParam(required = false) Long chefId) {
         if (consumerId != null) return service.listForConsumer(consumerId);
