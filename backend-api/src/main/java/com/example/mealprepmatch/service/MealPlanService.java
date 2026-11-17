@@ -43,13 +43,11 @@ public class MealPlanService {
         plan.setDescription(incoming.getDescription());
         plan.setCalories(incoming.getCalories());
         plan.setConsumer(consumer);
-        // findAllById can return an immutable empty list; copy so the plan's meals stay modifiable
         plan.setMealsThisWeek(new ArrayList<>(meals));
         return mealPlanRepo.save(plan);
     }
 
-    // UC2: add one meal to an existing plan
-    // TODO: add consumerId parameter + ownership check, blacklist rule, calorie recalculation
+    // gotta add consumerId parameter + ownership check, blacklist rule, calorie recalculation
     public MealPlan addMeal(Long planId, Long mealId) {
         MealPlan plan = mealPlanRepo.findById(planId)
                 .orElseThrow(() -> new NotFoundException("Meal plan not found"));
@@ -63,11 +61,9 @@ public class MealPlanService {
         }
 
         plan.getMealsThisWeek().add(meal);
-        return plan;   // managed entity, saved when the transaction commits
+        return plan;
     }
 
-    // UC2: remove one meal from a plan
-    // TODO: add consumerId parameter + ownership check, calorie recalculation
     public MealPlan removeMeal(Long planId, Long mealId) {
         MealPlan plan = mealPlanRepo.findById(planId)
                 .orElseThrow(() -> new NotFoundException("Meal plan not found"));
@@ -90,7 +86,6 @@ public class MealPlanService {
         return mealPlanRepo.findByConsumerId(consumerId);
     }
 
-    // All meals, A-Z, for the "add a meal" list. Swap for MealService if you have one.
     @Transactional(readOnly = true)
     public List<Meal> listMealCatalog() {
         return mealRepo.findAllByOrderByNameAsc();
