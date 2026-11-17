@@ -1,4 +1,6 @@
 package com.example.mealprepmatch.service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -27,7 +29,7 @@ public class MealPlanService {
         this.mealRepo = mealRepo;
     }
 
-    public MealPlan create(Long consumerId, Long chefId, List<Long> mealIds, MealPlan incoming) {
+    public MealPlan create(Long consumerId, List<Long> mealIds, MealPlan incoming) {
         Consumer consumer = consumerRepo.findById(consumerId)
                 .orElseThrow(() -> new NotFoundException("Consumer not found"));
 
@@ -41,8 +43,40 @@ public class MealPlanService {
         plan.setDescription(incoming.getDescription());
         plan.setCalories(incoming.getCalories());
         plan.setConsumer(consumer);
-        plan.setMealsThisWeek(meals);
+        // findAllById can return an immutable empty list; copy so the plan's meals stay modifiable
+        plan.setMealsThisWeek(new ArrayList<>(meals));
         return mealPlanRepo.save(plan);
+    }
+
+    // UC2: add one meal to an existing plan
+    // TODO: add consumerId parameter + ownership check, blacklist rule, calorie recalculation
+    public MealPlan addMeal(Long planId, Long mealId) {
+        MealPlan plan = mealPlanRepo.findById(planId)
+                .orElseThrow(() -> new NotFoundException("Meal plan not found"));
+        Meal meal = mealRepo.findById(mealId)
+                .orElseThrow(() -> new NotFoundException("Meal not found"));
+
+        boolean alreadyAdded = plan.getMealsThisWeek().stream()
+                .anyMatch(m -> m.getId().equals(mealId));
+        if (alreadyAdded) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "That meal is already in this plan");
+        }
+
+        plan.getMealsThisWeek().add(meal);
+        return plan;   // managed entity, saved when the transaction commits
+    }
+
+    // UC2: remove one meal from a plan
+    // TODO: add consumerId parameter + ownership check, calorie recalculation
+    public MealPlan removeMeal(Long planId, Long mealId) {
+        MealPlan plan = mealPlanRepo.findById(planId)
+                .orElseThrow(() -> new NotFoundException("Meal plan not found"));
+
+        boolean removed = plan.getMealsThisWeek().removeIf(m -> m.getId().equals(mealId));
+        if (!removed) {
+            throw new NotFoundException("That meal is not in this plan");
+        }
+        return plan;
     }
 
     @Transactional(readOnly = true)
@@ -54,6 +88,12 @@ public class MealPlanService {
     @Transactional(readOnly = true)
     public List<MealPlan> listForConsumer(Long consumerId) {
         return mealPlanRepo.findByConsumerId(consumerId);
+    }
+
+    // All meals, A-Z, for the "add a meal" list. Swap for MealService if you have one.
+    @Transactional(readOnly = true)
+    public List<Meal> listMealCatalog() {
+        return mealRepo.findAllByOrderByNameAsc();
     }
 
     public void delete(Long id) {

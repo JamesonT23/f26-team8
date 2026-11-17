@@ -28,8 +28,8 @@ public class MealPlanController {
     }
 
     @PostMapping
-    public ResponseEntity<MealPlan> create(@RequestParam Long consumerId, @RequestParam Long chefId, @RequestParam List<Long> mealIds, @Valid @RequestBody MealPlan plan) {
-        MealPlan created = service.create(consumerId, chefId, mealIds, plan);
+    public ResponseEntity<MealPlan> create(@RequestParam Long consumerId, @RequestParam List<Long> mealIds, @Valid @RequestBody MealPlan plan) {
+        MealPlan created = service.create(consumerId, mealIds, plan);
         return ResponseEntity.created(URI.create("/api/meal-plans/" + created.getId())).body(created);
     }
 
