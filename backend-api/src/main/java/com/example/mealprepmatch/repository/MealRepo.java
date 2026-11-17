@@ -10,4 +10,6 @@ public interface MealRepo extends JpaRepository<Meal, Long> {
 
     List<Meal> findAllByOrderByNameAsc();
 
+    List<Meal> findByChef_Id(Long chefId);
+
 }

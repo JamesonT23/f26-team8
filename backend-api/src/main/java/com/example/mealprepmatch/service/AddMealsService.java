@@ -34,6 +34,21 @@ public class AddMealsService {
         return mealRepo.findAll();
     }
 
+    // View details of a specific meal
+    public Meal getMealById(Long mealId) {
+        return mealRepo.findById(mealId)
+                .orElseThrow(() -> new NotFoundException("Meal not found"));
+    }
+
+    // View meals belonging to a specific chef
+    public List<Meal> getMealsByChef(Long chefId) {
+        if (!chefRepo.existsById(chefId)) {
+            throw new NotFoundException("Chef not found");
+        }
+
+        return mealRepo.findByChef_Id(chefId);
+    }
+
     // Delete a meal
     public void deleteMeal(Long mealId) {
         if (!mealRepo.existsById(mealId)) {

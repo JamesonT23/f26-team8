@@ -2,7 +2,6 @@ package com.example.mealprepmatch.entity;
 
 import java.util.EnumSet;
 import java.util.Set;
-
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -16,6 +15,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "meals")
@@ -25,21 +27,30 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Meal name is required")
     @Column(nullable = false)
     private String name;
 
     @Column(length = 2000)
     private String description;
 
+    @NotNull(message = "Calories are required")
+    @PositiveOrZero(message = "Calories cannot be negative")
     @Column(nullable = false)
     private Double calories;
 
+    @NotNull(message = "Carbohydrates are required")
+    @PositiveOrZero(message = "Carbohydrates cannot be negative")
     @Column(nullable = false)
     private Integer carbohydrates;
 
+    @NotNull(message = "Protein is required")
+    @PositiveOrZero(message = "Protein cannot be negative")
     @Column(nullable = false)
     private Integer protein;
 
+    @NotNull(message = "Fat is required")
+    @PositiveOrZero(message = "Fat cannot be negative")
     @Column(nullable = false)
     private Integer fat;
 
